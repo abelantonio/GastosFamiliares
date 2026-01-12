@@ -1,0 +1,23 @@
+@startuml
+actor usuario as "User5"
+actor usuario2 as "User6"
+package gestion_de_actores{
+ (Sacar un miembro de mi familia) as CU1
+ (Invitar a un miembro a \nser parte de mi familia) as CU2
+ note top:solo para miembros creadores de familia
+ (Otro caso de uso especial) as CU3
+ actor Usuario2 as "Normal"
+ actor Administrador
+ actor Usuario
+ actor maria
+ note top:user
+ :otroUser: as "LOCAL"
+ Usuario --> CU1
+ usuario --> CU2
+ usuario2 --> CU2
+ CU2 ..> CU3:include
+
+ maria --> (caso de uso diferente)
+ note bottom:esto es simplemente ejemplo de un caso de uso
+}
+@enduml

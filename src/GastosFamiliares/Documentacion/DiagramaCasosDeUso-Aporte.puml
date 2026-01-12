@@ -1,0 +1,63 @@
+@startuml
+left to right direction
+actor Miembro
+package gestion_de_aportes{
+(Crear mi aporte) as CU1
+(Consultar mi aporte) as CU2
+(Modificar la informacion \nde mi aporte) as CU3
+(Eliminar mi aporte) as CU4
+(Listar mis aportes) as CU5
+' -- 
+(Consultar mi aporte \npor nombre) as CUC6
+(Consultar mi aporte \npor descripcion) as CUC7
+(Consultar mi aporte \npor valor) as CUC8
+(Consultar mi aporte \npor fechaRegistro) as CUC9
+(Consultar mi aporte \npor mi gasto) as CUC10
+(Consultar mi aporte \npor mi ingreso) as CUC11
+' --
+(Listar mis aportes \npor bolsaDeAhorro) as CUL12
+(Listar mis aportes \npor nombre) as CUL13
+(Listar mis aportes \npor valor) as CUL14
+(Listar aportes \npor miembro) as CUL15
+note right:Solo para miembros creadores de familia
+(Listar mis aportes \npor mi gasto) as CUL16
+(Listar mis aportes \npor mi ingreso) as CUL17
+(Listar mis aportes \npor periodo) as CUL18
+(Listar mis aportes \npor rango de valores) as CUL19
+' -- 
+(Consultar mi gasto) as CUE1
+(Consultar mi ingreso) as CUE2
+(Consultar mi bolsaDeAhorro) as CUE3
+(Consultar miembro) as CUE4
+' --
+Miembro --> CU1 
+Miembro <-- CU2
+Miembro --> CU3
+Miembro --> CU4
+Miembro <-- CU5
+CU2 <|-- CUC6
+CU2 <|-- CUC7
+CU2 <|-- CUC8
+CU2 <|-- CUC9
+CU2 <|-- CUC10
+CU2 <|-- CUC11
+CUC10 ..> CUE1:include
+CUC11 ..> CUE2:include
+' --
+CU5 <|-- CUL12
+CU5 <|-- CUL13
+CU5 <|-- CUL14
+CU5 <|-- CUL15
+CU5 <|-- CUL16
+CU5 <|-- CUL17
+CU5 <|-- CUL18
+CU5 <|-- CUL19
+CUL12 ..> CUE3:include
+CUL15 ..> CUE4:include
+CUL16 ..> CUE1:include
+CUL17 ..> CUE2:include
+' -- 
+CU3 ..> CU2:include 
+CU4 ..> CU2:include
+}
+@enduml

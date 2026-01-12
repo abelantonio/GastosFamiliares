@@ -1,0 +1,55 @@
+@startuml
+left to right direction
+actor Miembro
+package gestion_de_ingresos{
+(Crear mi ingreso) as CU1
+(Consultar mi ingreso) as CU2
+(Modificar la informacion \nde mi ingreso) as CU3
+(Eliminar mi ingreso) as CU4
+(Listar mis ingresos) as CU5
+' --
+(Consultar mi ingreso \npor nombre) as CUE1   
+(Consultar mi ingreso \npor descripcion) as CUE2
+(Consultar mi ingreso \npor fechaActualRegistro) as CUE3
+(Consultar mi ingreso \npor mi aporte) as CUE4
+(Consultar mi ingreso \npor valor) as CUE5
+' --
+(Listar mis ingresos \npor nombre) as CUE6
+(Listar mis ingresos \npor fechaActualRegistro) as CUE7
+(Listar mis ingresos \npor fuente) as CUE8
+(Listar mis ingresos \npor valor) as CUE9
+(Listar mis ingresos \npor miembro) as CUE10
+note right: Solo para creadores de familia
+
+(Listar mis ingresos \npor rango de valores) as CUE11
+(Listar mis ingresos \npor periodo) as CUE12
+' --
+(Consultar mi aporte) as CUE13
+(Consultar fuente) as CUE14
+(Consultar miembro) as CUE15
+'--
+Miembro --> CU1
+Miembro <-- CU2
+Miembro --> CU3
+Miembro --> CU4
+Miembro <-- CU5
+CU2 <|-- CUE1
+CU2 <|-- CUE2
+CU2 <|-- CUE3
+CU2 <|-- CUE4
+CU2 <|-- CUE5
+' --
+CU5 <|-- CUE6
+CU5 <|-- CUE7
+CU5 <|-- CUE8
+CU5 <|-- CUE9
+CU5 <|-- CUE10
+'-- 
+CUE4 ..> CUE13:include
+CUE8 ..> CUE14:include
+CUE10 ..> CUE15:include
+CU3 ..> CU2:include
+CU4 ..> CU2:include
+
+}
+@enduml

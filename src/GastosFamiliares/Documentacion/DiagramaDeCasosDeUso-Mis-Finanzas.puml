@@ -1,0 +1,30 @@
+@startuml
+actor Miembro
+Miembro --> gestion_mis_finanzas
+package gestion_mis_finanzas{
+(Consultar mi saldo)
+(Consultar mi saldo por fecha)
+(Consultar mi saldo por periodo)
+(Consultar mi total de ingresos por fuente)
+(Consultar mi total de gastos por categoria)
+(Consultar mis fuentes con mayores ingresos)
+(Consultar mis fuentes con menores ingresos)
+(Consultar mis categorias con mayores gastos)
+(Consultar mis categorias con menores gastos)
+(Consultar las bolsas de ahorros con mayores aportes)
+(Consultar las bolsas de ahorros con menores aportes)
+(Consultar el miembro de mi familia que mas realiza aportes)
+(Consultar el total de ahorros de mi familia)
+(Consultar el promedio de ahorros de mi familia)
+(Consultar mi total de ingresos por periodo)
+(Consultar mi total de gastos por periodo)
+(Consultar el promedio de ingresos por fuente)
+(Consultar el promedio de gastos por categoria)
+(Consultar el promedio de ingresos por periodo)
+(Consultar el promedio de gastos por periodo)
+(Consultar la cantidad de aportes de mi familia registrados en un periodo)
+(Consultar el total de aportes registrados en un periodo)
+(Consultar el promedio de aportes registrados en una fecha)
+(Consultar el promedio de aportes registrados en un periodo)
+}
+@enduml

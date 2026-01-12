@@ -1,0 +1,45 @@
+@startuml
+left to right direction
+actor Usuario
+actor Miembro
+actor Administrador
+package gestion_de_categorias{
+(Crear categoria) as CU1
+(Consultar categoria) as CU2
+(Eliminar categoria) as CU3
+(Modificar categoria) as CU4
+(listar categorias) as CU5
+(Consultar categoria \npor nombre) as CUE1
+(Consultar categoria \npor descripcion) as CUE2
+(Consultar categoria \npor fechaRegistro) as CUE3
+(Listar las categorias \npor nombre) as CUE4
+(Listar las categorias \npor fechaRegistro) as CUE5
+(Listar las categorias \npor miembro) as CUE6
+note left:Solo miembros creadores de familia
+(Listar solo los nombres \nde las categorias registradas) as CU6
+(listar categorias que mas \ncontienen gastos) as CU7
+(Consultar miembro) as CUE7
+Miembro --> CU1
+Miembro <-- CU2
+Miembro --> CU3
+Miembro --> CU4
+Miembro <-- CU5
+Miembro <-- CU7
+' --
+Administrador --> CU1
+Administrador <-- CU2
+Administrador --> CU3
+Administrador --> CU4
+Administrador <-- CU5
+CU2 <|-- CUE1
+CU2 <|-- CUE2
+CU2 <|-- CUE3
+CU5 <|-- CUE4
+CU5 <|-- CUE5
+CU5 <|-- CUE6
+CU3 ..> CU2:include
+CU4 ..> CU2:include
+CUE6 ..> CUE7:include
+Usuario --> CU6
+}
+@enduml

@@ -1,0 +1,68 @@
+@startuml
+left to right direction
+actor Miembro
+package gestion_de_bolsa_de_ahorro{
+(Crear la bolsa de ahorro \npara mi familia) as CU1
+(Consultar la bolsa de \nahorro de mi familia) as CU2
+(Modificar la informacion \nde la bolsa de ahorro \nde mi familia) as CU3
+(Cerrar la bolsa de \nahorro de mi familia) as CU4
+(Listar las bolsas de ahorro \nde mi familia) as CU5
+(Ver el progreso de la \nbolsa de ahorro de \nmi familia) as CU6
+' --
+(Consultar mi bolsa de ahorro \npor nombre) as CUC6
+(Consultar mi bolsa de ahorro \npor descripcion) as CUC7
+(Consultar mi bolsa de ahorro \npor estado) as CUC8
+(Consultar mi bolsa de ahorro \npor fechaInicio) as CUC9
+(Consultar mi bolsa de ahorro \npor fechaFin) as CUC10
+(Consultar mi bolsa de ahorro \npor fechaRegistro) as CUC11
+(Consultar mi bolsa de ahorro \npor objetivo) as CUC12
+(Consultar mi bolsa de ahorro \npor mi aporte) as CUC13
+' -- 
+(Listar mis bolsas de ahorro \npor miembro) as CUL14
+note left:Solo para miembros creadores de familia
+(Listar las bolsas de ahorro \npor nombre) as CUL15
+(Listar bolsas de ahorro \npor estado) as CUL16
+(Listar bolsas de ahorro \npor fechaInicio) as CUL17
+(Listar bolsas de ahorro \npor fechaFin) as CUL18
+(Listar bolsas de ahorro \npor fechaRegistro) as CUL19
+(Listar bolsas de ahorro \npor objetivo) as CUL20
+(Listar bolsas de ahorro \npor periodo de inicio) as CUL21
+(Listar bolsas de ahorro \npor periodo de cierre) as CUL22
+(Listar bolsas de ahorro \npor rango de valores) as CUL23
+' -- 
+(Consultar mi aporte) as CUE1
+(Consultar miembro) as CUE2
+' -- 
+Miembro --> CU1
+Miembro <-- CU2
+Miembro --> CU3
+Miembro --> CU4
+Miembro <-- CU5
+Miembro --> CU6
+CU2 <|-- CUC6
+CU2 <|-- CUC7
+CU2 <|-- CUC8
+CU2 <|-- CUC9
+CU2 <|-- CUC10
+CU2 <|-- CUC11
+CU2 <|-- CUC12
+CU2 <|-- CUC13
+CUC13 ..> CUE1:include
+' --
+CU5 <|-- CUL14
+CU5 <|-- CUL15
+CU5 <|-- CUL16
+CU5 <|-- CUL17
+CU5 <|-- CUL18
+CU5 <|-- CUL19
+CU5 <|-- CUL20
+CU5 <|-- CUL21
+CU5 <|-- CUL22
+CU5 <|-- CUL23
+CUL14 ..> CUE2:include
+' --
+CU3 ..> CU2:include
+CU4 ..> CU2:include
+CU6 ..> CU2:include
+}
+@enduml

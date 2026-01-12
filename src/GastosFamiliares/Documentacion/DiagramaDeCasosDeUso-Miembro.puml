@@ -1,0 +1,47 @@
+@startuml
+left to right direction
+' actores: administrador, miembro, usuario
+actor Usuario
+actor Miembro
+package gestion_de_miembros{
+(Listar los miembros de mi familia) as CU1
+(Consultar un miembro de mi familia) as CU2
+(Sacar un miembro de mi familia) as CU3
+note right:Solo para miembros creadores de familia
+(Modificar la informacion de un \nmiembro de mi familia) as CU4
+(Eliminar un miembro de mi familia) as CU5
+(Listar los miembros de mi familia \nmayores de edad) as CUE1
+(Listar los miembros de mi familia \nmenores de edad) as CUE2
+(Listar los miembros de mi familia \npor ocupacion) as CUE3
+(Listar los miembros de mi familia \npor genero) as CUE4
+(Listar los miembros de mi familia \nque realizan aportes) as CUE5
+(Listar los miembros de mi familia \ndesocupados) as CUE6
+(Consultar un miembro de mi familia \npor fechaNacimiento) as CUE7
+(Consultar un miembro de mi familia \npor numTelefonico) as CUE8
+(Consultar un miembro de mi familia \npor rol) as CUE9
+(Registrarse como miembro \nde una familia) as CU6
+(Solicitar ser miembro \nde una familia) as CU7
+(Consultar la familia) as CUE10
+Miembro <-- CU1
+Miembro <-- CU2
+Miembro --> CU3
+Miembro --> CU4
+Miembro --> CU5
+Usuario --> CU6
+Usuario --> CU7
+CU1 <|-- CUE1
+CU1 <|-- CUE2
+CU1 <|-- CUE3
+CU1 <|-- CUE4
+CU1 <|-- CUE5
+CU1 <|-- CUE6
+CU2 <|-- CUE7
+CU2 <|-- CUE8
+CU2 <|-- CUE9
+CU3 ..> CU2:include
+CU4 ..> CU2:include
+CU5 ..> CU2:include
+CU6 ..> CUE10:include
+CU7 ..> CUE10:include
+}
+@enduml
