@@ -1,0 +1,54 @@
+@startuml
+left to right direction
+actor Miembro
+package gestion_de_gastos{
+(Crear mi gasto) as CU1
+(Consultar mi gasto) as CU2
+(Modificar la informacion \nde mi gasto) as CU3
+(Eliminar mi gasto) as CU4
+(Listar mis gastos) as CU5
+' --
+(Consultar mi gasto \npor nombre) as CUC6   
+(Consultar mi gasto \npor descripcion) as CUC7
+(Consultar mi gasto \npor fechaActualRegistro) as CUC8
+(Consultar mi gasto \npor mi aporte) as CUC9
+(Consultar mi gasto \npor valor) as CUC10
+' --
+(Listar mis gastos \npor nombre) as CUL11
+(Listar mis gastos \npor fechaActualRegistro) as CUL12
+(Listar mis gastos \npor categoria) as CUL13
+(Listar mis gastos \npor valor) as CUL14
+(Listar mis gastos \npor rango de valores) as CUL15
+(Listar mis gastos \npor periodo) as CUL16
+(Listar mis gastos \npor miembro) as CUL17
+note right: Solo para miembros creadores de familia
+' --
+(Consultar mi aporte) as CUE1
+(Consultar categoria) as CUE2
+(Consultar miembro) as CUE3
+'--
+Miembro --> CU1
+Miembro <-- CU2
+Miembro --> CU3
+Miembro --> CU4
+Miembro <-- CU5
+CU2 <|-- CUC6
+CU2 <|-- CUC7
+CU2 <|-- CUC8
+CU2 <|-- CUC9
+CU2 <|-- CUC10
+CUC9 ..> CUE1:include
+CU3 ..> CU2:include
+CU4 ..> CU2:include
+' -- 
+CU5 <|-- CUL11
+CU5 <|-- CUL12
+CU5 <|-- CUL13
+CU5 <|-- CUL14
+CU5 <|-- CUL15
+CU5 <|-- CUL16
+CU5 <|-- CUL17
+CUL13 ..> CUE2:include
+CUL17 ..> CUE3:include
+}
+@enduml

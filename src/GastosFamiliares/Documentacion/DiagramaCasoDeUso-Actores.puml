@@ -1,0 +1,7 @@
+@startuml
+actor Usuario
+actor Administrador
+actor Miembro
+Usuario <|-- Administrador
+Usuario <|-- Miembro
+@enduml

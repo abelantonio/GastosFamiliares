@@ -1,0 +1,51 @@
+@startuml
+left to right direction
+actor Usuario
+actor Administrador
+actor Miembro
+package gestion_de_familia{
+(Crear mi familia) as CU1
+(Consultar mi familia) as CU2
+(Modificar la informacion \nde mi familia) as CU3
+(Eliminar mi familia) as CU4
+(Aceptar o rechazar la solicitud de \nun miembro para ser parte de mi familia) as CU5
+(Invitar a un miembro \na ser parte de mi familia) as CU6
+' --
+(Listar las familias) as CU7
+(Eliminar familia) as CU8
+(Consultar familia) as CU9
+' --
+(Listar solo los nombres \nde las familias registradas) as CU10
+' --
+(Consultar mi familia \npor nombre) as CUC1
+(Consultar mi familia \npor direccion) as CUC2
+(Consultar mi familia \npor correo) as CUC3
+(Consultar mi familia \npor numTelefonico) as CUC4
+' --
+(Listar las familias \npor nombre) as CUL5
+(Listar las familias \npor direccion) as CUL6
+' --
+Miembro --> CU1
+Miembro <-- CU2
+Miembro --> CU3
+Miembro --> CU4
+Miembro --> CU5
+Miembro --> CU6
+CU2 <|-- CUC1
+CU2 <|-- CUC2
+CU2 <|-- CUC3
+CU2 <|-- CUC4
+' --
+CU7 <|-- CUL5
+CU7 <|-- CUL6
+' --
+CU3 ..> CU2:include
+CU4 ..> CU2:include
+' --
+Administrador <-- CU7
+Administrador --> CU8
+CU8 ..> CU9:include
+' --
+Usuario <-- CU10
+}
+@enduml

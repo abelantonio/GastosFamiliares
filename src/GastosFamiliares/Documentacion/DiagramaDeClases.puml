@@ -1,0 +1,221 @@
+@startuml
+left to right direction
+'Clases
+' las clases son los formularios en las interfaces que
+' se le mostraran al usuario
+class Usuario{
+   # String codigo;
+   # String password;
+   # String nombre;
+   # String apellido;
+   # String correo;
+   # RolUsuarioEnum rol; 'administrador, miembro
+   + Usuario()
+   + void setCodigo(String codigo)
+   + String getCodigo()
+   ' relaciones
+   - List<Fuente> fuentes;
+   - List<Categoria> categorias;
+}
+
+class Miembro{
+   - String segundoNombre;
+   - String segundoApellido;
+   - String direccion;
+   - String numTelefonico;
+   - LocalDate fechaNacimiento;
+   - LocalDate ocupacion;
+   ' relaciones
+   - RolFamiliarEnum rol;
+   - GeneroMiembroEnum genero;
+   - Familia familia;
+   - List<Ingreso> ingresos;
+   - List<Gasto> gastos;
+   - List<BolsaDeAhorro> bolsasDeAhorro;
+   - List<Aporte> aportes;
+}
+
+class Familia{
+   - int id; 'autoincremental
+   - String nombre;
+   - String direccion;
+   - String correo;
+   - String numTelefonico;
+   - String foto;
+   ' relaciones
+   - List<Miembro> miembros;
+   - List<BolsaDeAhorro> bolsasDeAhorro;
+}
+
+class Ingreso{
+   - int id; 'autoincremental
+   - String nombre;
+   - float valor;
+   - String descripcion;
+   - LocalDateTime fechaHoraRegistro;
+   - LocalDate fechaActualRegistro;
+   ' relaciones
+   - Fuente fuente;
+   - Miembro miembro;
+   - List<Aporte> aportes; ' puede ser null
+}
+
+class Gasto{
+   - int id; 'autoincremental
+   - String nombre;
+   - float valor;
+   - String descripcion;
+   - LocalDateTime fechaHoraRegistro;
+   - LocalDate fechaRegistro;
+   ' relaciones
+   - List<Categoria> categorias;
+   - Miembro miembro;
+   - Aporte aporte; ' puede ser null 
+}
+
+class Fuente{
+   - int id; 'autoincremental
+   - String nombre;
+   - String descripcion;
+   - LocalDate fechaRegistro;
+   - String icono;
+   ' relaciones
+   - Usuario usuario;
+   - List<Ingreso> ingresos;
+}
+
+class Categoria{
+   - int id; 'autoincremental
+   - String nombre;
+   - String descripcion;
+   - LocalDate fechaRegistro;
+   - String foto;
+   ' relaciones
+   - Usuario usuario;
+   - List<Gasto> gastos;
+}
+
+class BolsaDeAhorro{
+   - int id; 'autoincremental
+   - String nombre;
+   - String descripcion;
+   - LocalDateTime fechaRegistro;
+   - LocalDate fechaInicio;
+   - LocalDate fechaFin;
+   - String foto;
+   - float objetivo;
+   - EstadoBolsaEnum estado;
+   ' relaciones
+   - Miembro miembro;
+   - Familia familia;
+   - List<Aporte> aportes;
+}
+
+class Aporte{
+   - int id; 'autoincremental
+   - String nombre;
+   - float valor;
+   - String descripcion;
+   - LocalDateTime fechaRegistro;
+   ' relaciones
+   - Miembro miembro;
+   - BolsaDeAhorro bolsaAhorro;
+   - Ingreso ingreso;
+   - Gasto gasto;
+}
+
+'Enumeraciones
+
+enum RolUsuarioEnum{
+   ADMINISTRADOR,
+   MIEMBRO
+}
+
+enum RolFamiliarEnum{
+   ABUELO,
+   ABUELA,
+   PADRE,
+   MADRE,
+   HIJO,
+   HIJA,
+   '--
+   TIO,
+   TIA,
+   PRIMO,
+   PRIMA
+}
+
+enum GeneroMiembroEnum{
+   MASCULINO,
+   FEMENINO,
+   OTRO
+}
+
+enum EstadoBolsaEnum{
+   ACTIVA,
+   LOGRADA,
+   CERRADA
+}
+
+'Relaciones
+
+' las relaciones son las cosas de hacemos para que podamos tomar
+' datos de otras clases
+Usuario <|-- Miembro: es un
+Familia "1" -- "*" Miembro: pertenecer
+Familia "1" -- "*" BolsaDeAhorro: pertenecer
+Familia "*" -- "1" Usuario: crear
+Miembro "1" -- "*" Ingreso: obtiene
+Miembro "1" -- "*" Gasto: realiza
+Miembro "1" -- "*" Aporte: realiza
+Miembro "1" -- "*" BolsaDeAhorro: crear
+Ingreso "*" - "1" Fuente: pertenecer
+Ingreso "1" -- "*" Aporte: tiene
+Gasto "*" -- "1" Categoria: pertenece
+Gasto "1" -- "1" Aporte: tiene
+Aporte "*" -- "1" BolsaDeAhorro: pertenece
+Fuente "*" -- "1" Usuario: crear
+Categoria "*" -- "1" Usuario: crear
+@enduml
+
+/'
+BolsaDeAhorro - Familia
+BolsaDeAhorro - Miembro
+BolsaDeAhorro - Aporte
+--
+Aporte - Miembro
+Aporte - Ingreso
+Aporte - Gasto
+Aporte - BolsaDeAhorro
+--
+Categoria - Gasto
+Categoria - Usuario
+--
+Fuente - Ingreso
+Fuente - Usuario
+-- 
+Gasto - Miembro
+Gasto - Categoria
+Gasto - Aporte
+--
+Ingreso - Miembro
+Ingreso - Fuente
+Ingreso - Aporte
+--
+Miembro - Familia
+Miembro - Ingreso
+Miembro - Gasto
+Miembro - Aporte
+Miembro - BolsaDeAhorro
+Miembro - Usuario
+--
+Familia - Miembro
+Familia - BolsaDeAhorro
+Familia - Usuario
+--
+Usuario -- Miembro
+'/
+
+'Usuario, Familia, Miembro,
+'Ingresos, Gastos, Fuentes, Categorias,
+'BolsaDeAhorro, Aportes
