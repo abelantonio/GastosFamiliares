@@ -16,6 +16,7 @@ class Usuario{
    ' relaciones
    - List<Fuente> fuentes;
    - List<Categoria> categorias;
+   - List<Familia> familias;
 }
 
 class Miembro{
@@ -24,9 +25,9 @@ class Miembro{
    - String direccion;
    - String numTelefonico;
    - LocalDate fechaNacimiento;
-   - LocalDate ocupacion;
+   - String ocupacion;
    ' relaciones
-   - RolFamiliarEnum rol;
+   - RolFamiliarMiembroEnum rol;
    - GeneroMiembroEnum genero;
    - Familia familia;
    - List<Ingreso> ingresos;
@@ -43,6 +44,7 @@ class Familia{
    - String numTelefonico;
    - String foto;
    ' relaciones
+   - Usuario creador;
    - List<Miembro> miembros;
    - List<BolsaDeAhorro> bolsasDeAhorro;
 }
@@ -103,8 +105,9 @@ class BolsaDeAhorro{
    - LocalDate fechaInicio;
    - LocalDate fechaFin;
    - String foto;
+   - float montoIdeal;
    - float objetivo;
-   - EstadoBolsaEnum estado;
+   - EstadoBolsaAhorroEnum estado;
    ' relaciones
    - Miembro miembro;
    - Familia familia;
@@ -131,7 +134,7 @@ enum RolUsuarioEnum{
    MIEMBRO
 }
 
-enum RolFamiliarEnum{
+enum RolFamiliarMiembroEnum{
    ABUELO,
    ABUELA,
    PADRE,
@@ -151,7 +154,7 @@ enum GeneroMiembroEnum{
    OTRO
 }
 
-enum EstadoBolsaEnum{
+enum EstadoBolsaAhorroEnum{
    ACTIVA,
    LOGRADA,
    CERRADA
