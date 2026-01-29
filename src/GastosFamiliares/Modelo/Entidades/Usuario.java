@@ -3,25 +3,38 @@ package GastosFamiliares.Modelo.Entidades;
 import GastosFamiliares.Modelo.Enumeraciones.RolUsuarioEnum;
 import java.io.Serializable;
 import java.util.Objects;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.Id;
 
 /**
  *
  * @author Abel Antonio Tatis Maturana
  */
+@Entity(name="usuarios")
 public class Usuario implements Serializable {
-
+    @Id
+    @Column(name = "ID", length = 20)
     private String codigo;
+    @Column(name = "PASSWORD", nullable = false, length = 30)
     private String password;
+    @Column(name = "NOMBRE", nullable = false, length = 40)
     private String nombre;
+    @Column(name = "APELLIDO", nullable = false, length = 50)
     private String apellido;
+    @Column (name = "CORREO", nullable = false, unique = true, length = 70)
     private String correo;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "ROL")
     private RolUsuarioEnum rol; // 'administrador, miembro
 
     // Constructor por defecto (sin parametros)
     public Usuario() {
     }
 
-    // Constructores con parametros
+    // Constructor personalizado
     public Usuario(String codigo, String nombre, String apellido,
             RolUsuarioEnum rol) {
         this.codigo = codigo;
@@ -29,7 +42,8 @@ public class Usuario implements Serializable {
         this.apellido = apellido;
         this.rol = rol;
     }
-
+    
+    // Constructor con todos los parametros
     public Usuario(String codigo, String password, String nombre,
             String apellido, String correo, RolUsuarioEnum rol) {
         this.codigo = codigo;
