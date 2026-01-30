@@ -2,19 +2,22 @@ package GastosFamiliares.Modelo.Entidades;
 
 import GastosFamiliares.Modelo.Enumeraciones.RolUsuarioEnum;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  *
  * @author Abel Antonio Tatis Maturana
  */
-@Entity(name="usuarios")
+@Entity(name="Usuarios")
 public class Usuario implements Serializable {
+    private static final long serialVersionUID = 0L;
     @Id
     @Column(name = "ID", length = 20)
     private String codigo;
@@ -29,6 +32,11 @@ public class Usuario implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(name = "ROL")
     private RolUsuarioEnum rol; // 'administrador, miembro
+//  relaciones
+   private List<Fuente> fuentes;
+   private List<Categoria> categorias;
+   @OneToMany(mappedBy = "creador")
+   private List<Familia> familias;
 
     // Constructor por defecto (sin parametros)
     public Usuario() {

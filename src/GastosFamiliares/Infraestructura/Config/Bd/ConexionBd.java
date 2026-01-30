@@ -24,11 +24,4 @@ public class ConexionBd {
       }
       conexion = null;
    }
-   
-   public static void guardar(Usuario u){
-       EntityManager em = conexion.createEntityManager();
-       em.getTransaction().begin(); // empezar la operacion
-       em.persist(u); // guardar el objeto
-       em.getTransaction().commit(); // aplicar los cambios
-   }
 }

@@ -2,22 +2,40 @@ package GastosFamiliares.Modelo.Entidades;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  *
  * @author Abel Antonio Tatis Maturana
  */
+@Entity(name = "Familias")
 public class Familia implements Serializable {
-
+    private static final long serialVersionUID = 0L;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
     private int id; // autoincremental
+    @Column(length = 150, nullable = false)
     private String nombre;
     private String direccion;
+    @Column(length = 70, unique = true)
     private String correo;
+    @Column(length = 30)
     private String numTelefonico;
     private String foto;
     // relaciones
+    @ManyToOne(optional = true)
+    @JoinColumn(name = "usuario_creador_id")
     private Usuario creador;
+    @OneToMany(mappedBy = "familia")
     private List<Miembro> miembros;
+    @OneToMany(mappedBy = "familia")
     private List<BolsaDeAhorro> bolsasDeAhorro;
 
     // Constructores

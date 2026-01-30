@@ -26,9 +26,8 @@ public class Principal {
 //        System.out.println("numero entero del objeto u3: "+u3.hashCode());
 //          Gasto g1 = new Gasto(1, "Gasto 1", 1000, "Ninguno", LocalDateTime.MIN, LocalDate.MIN, null, null, null);
 //          System.out.println(g1.toString());
-          Usuario u = new Usuario("00", "123", "juan", "jaramillo", "juan@prueba.com", RolUsuarioEnum.ADMINISTRADOR);
+          
           ConexionBd.conectar();
-          ConexionBd.guardar(u);
           ConexionBd.desconectar();
           
     }

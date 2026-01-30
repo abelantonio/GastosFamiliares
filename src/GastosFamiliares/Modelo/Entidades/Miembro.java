@@ -6,6 +6,7 @@ import GastosFamiliares.Modelo.Enumeraciones.RolUsuarioEnum;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -23,6 +24,7 @@ public class Miembro extends Usuario implements Serializable {
 // ' relaciones
     private RolFamiliarMiembroEnum rolFamiliar;
     private GeneroMiembroEnum genero;
+    @OneToOne()
     private Familia familia;
     private List<Ingreso> ingresos;
     private List<Gasto> gastos;
