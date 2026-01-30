@@ -13,9 +13,10 @@ package gestion_de_familia{
 ' --
 (Listar las familias) as CU7
 (Eliminar familia) as CU8
-(Consultar familia) as CU9
+(Crear familia) as CU9
+(Consultar familia) as CU10
 ' --
-(Listar solo los nombres \nde las familias registradas) as CU10
+(Listar solo los nombres \nde las familias registradas) as CU11
 ' --
 (Consultar mi familia \npor nombre) as CUC1
 (Consultar mi familia \npor direccion) as CUC2
@@ -44,8 +45,9 @@ CU4 ..> CU2:include
 ' --
 Administrador <-- CU7
 Administrador --> CU8
-CU8 ..> CU9:include
+Administrador --> CU9
+CU8 ..> CU10:include
 ' --
-Usuario <-- CU10
+Usuario <-- CU11
 }
 @enduml
