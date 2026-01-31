@@ -17,9 +17,10 @@ import javax.persistence.OneToMany;
  */
 @Entity(name = "Familias")
 public class Familia implements Serializable {
+    // Reconstruiremos el obejto de tipo categoria
     private static final long serialVersionUID = 0L;
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id; // autoincremental
     @Column(length = 150, nullable = false)
     private String nombre;
@@ -31,7 +32,7 @@ public class Familia implements Serializable {
     private String foto;
     // relaciones
     @ManyToOne(optional = true)
-    @JoinColumn(name = "usuario_creador_id")
+    @JoinColumn(name = "familias")
     private Usuario creador;
     @OneToMany(mappedBy = "familia")
     private List<Miembro> miembros;

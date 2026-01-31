@@ -4,22 +4,42 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 /**
  *
  * @author Abel Antonio Tatis Maturana
  */
+@Entity(name = "Gastos")
 public class Gasto implements Serializable {
-
+    // Reconstruiremos el objeto de tipo gasto
+    private static final long serialVersionUID = 0L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id; // 'autoincremental
+    @Column(length = 100, nullable = false)
     private String nombre;
+    @Column(nullable = false)
     private float valor;
     private String descripcion;
     private LocalDateTime fechaHoraRegistro;
+    @Column(nullable = false)
     private LocalDate fechaRegistro;
     // ' relaciones
+    @OneToMany()
+    @JoinColumn(name = "gastos")
     private List<Categoria> categorias;
+    @OneToOne(optional = true)
+    @JoinColumn(name = "gastos")
     private Miembro miembro;
+    @OneToOne(mappedBy = "gasto")
     private Aporte aporte; // ' puede ser null
 
     public Gasto() {

@@ -5,25 +5,52 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 /**
  *
  * @author Abel Antonio Tatis Maturana
  */
+@Entity(name = "BolsaDeAhorro")
 public class BolsaDeAhorro implements Serializable{
-    private int id; // 'autoincremental
+   // Reconstruiremos el objeto de tipo BolsaDeAhorro
+   private static final long serialVersionUID = 0L;
+   @Id
+   @GeneratedValue(strategy = GenerationType.IDENTITY)
+   private int id; // 'autoincremental
+   @Column(length = 150, nullable = false)
    private String nombre;
    private String descripcion;
+   @Column(nullable = false)
    private LocalDateTime fechaRegistro;
+   @Column(nullable = false)
    private LocalDate fechaInicio;
+   @Column(nullable = false)
    private LocalDate fechaFin;
    private String foto;
+   @Column(nullable = false)
    private float montoIdeal;
+   @Column(nullable = false)
    private float objetivo;
+   @Enumerated(EnumType.STRING)
    private EstadoBolsaAhorroEnum estado;
 //   ' relaciones
+   @OneToOne(optional = true)
+   @JoinColumn(name = "bolsasDeAhorro")
    private Miembro miembro;
+   @OneToOne(optional = true)
+   @JoinColumn(name = "bolsasDeAhorro")
    private Familia familia;
+   @OneToMany(mappedBy = "bolsaAhorro")
    private List<Aporte> aportes;
 
     public BolsaDeAhorro() {

@@ -2,22 +2,44 @@ package GastosFamiliares.Modelo.Entidades;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 /**
  *
  * @author Abel Antonio Tatis Maturana
  */
+@Entity(name = "Aportes")
 public class Aporte implements Serializable{
-
+    // Reconstruiremos el objeto de tipo aporte
+    private static final long serialVersionUID = 0L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id; // 'autoincremental
+    @Column(length = 120, nullable = false)
     private String nombre;
+    @Column(nullable = false)
     private float valor;
     private String descripcion;
+    @Column(nullable = false)
     private LocalDateTime fechaRegistro;
 //   ' relaciones
+    @OneToOne(optional = true)
+    @JoinColumn(name = "aportes")
     private Miembro miembro;
+    @OneToOne(optional = true)
+    @JoinColumn(name = "aportes")
     private BolsaDeAhorro bolsaAhorro;
+    @OneToOne(optional = true)
+    @JoinColumn(name = "aportes")
     private Ingreso ingreso;
+    @OneToOne(optional = true)
+    @JoinColumn(name = "aporte")
     private Gasto gasto;
 
     public Aporte() {

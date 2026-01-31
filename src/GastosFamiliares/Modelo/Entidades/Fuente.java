@@ -3,20 +3,37 @@ package GastosFamiliares.Modelo.Entidades;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 /**
  *
  * @author Abel Antonio Tatis Maturana
  */
+@Entity(name = "Fuentes")
 public class Fuente implements Serializable {
-
+    // Reconstruiremos el objeto de tipo fuente
+    private static final long serialVersionUID = 0L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id; // 'autoincremental
+    @Column(length = 100, nullable = false)
     private String nombre;
     private String descripcion;
+    @Column(nullable = false)
     private LocalDate fechaRegistro;
     private String icono;
     // ' relaciones
+    @OneToOne(optional = true)
+    @JoinColumn(name = "fuentes")
     private Usuario usuario;
+    @OneToMany(mappedBy = "fuente")
     private List<Ingreso> ingresos;
 
     public Fuente() {

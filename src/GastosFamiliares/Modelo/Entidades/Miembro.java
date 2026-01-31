@@ -6,6 +6,8 @@ import GastosFamiliares.Modelo.Enumeraciones.RolUsuarioEnum;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 /**
@@ -21,14 +23,19 @@ public class Miembro extends Usuario implements Serializable {
     private String foto;
     private LocalDate fechaNacimiento;
     private String ocupacion;
-// ' relaciones
     private RolFamiliarMiembroEnum rolFamiliar;
     private GeneroMiembroEnum genero;
-    @OneToOne()
+// ' relaciones
+    @OneToOne(optional = true)
+    @JoinColumn(name = "miembros")
     private Familia familia;
+    @OneToMany(mappedBy = "miembro")
     private List<Ingreso> ingresos;
+    @OneToMany(mappedBy = "miembro")
     private List<Gasto> gastos;
+    @OneToMany(mappedBy = "miembro")
     private List<BolsaDeAhorro> bolsasDeAhorro;
+    @OneToMany(mappedBy = "miembro")
     private List<Aporte> aportes;
 
     public Miembro() {

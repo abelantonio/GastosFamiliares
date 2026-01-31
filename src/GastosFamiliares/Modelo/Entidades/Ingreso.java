@@ -4,22 +4,42 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 /**
  *
  * @author Abel Antonio Tatis Maturana
  */
+@Entity(name = "Ingresos")
 public class Ingreso implements Serializable {
-
+    // Reconstruir el objeto de tipo ingreso
+    private static final long serialVersionUID = 0L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;  // 'autoincremental
+    @Column(length = 100, nullable = false)
     private String nombre;
+    @Column(nullable = false)
     private float valor;
     private String descripcion;
     private LocalDateTime fechaHoraRegistro;
+    @Column(nullable = false)
     private LocalDate fechaActualRegistro;
 //    ' relaciones
+    @OneToOne(optional = true)
+    @JoinColumn(name = "ingresos")
     private Fuente fuente;
+    @OneToOne(optional = true)
+    @JoinColumn(name = "ingresos")
     private Miembro miembro;
+    @OneToMany(mappedBy = "ingreso")
     private List<Aporte> aportes; // ' puede ser null
 
     public Ingreso() {

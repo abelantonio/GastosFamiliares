@@ -4,20 +4,37 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 /**
  *
  * @author Abel Antonio Tatis Maturana
  */
+@Entity(name = "Categorias")
 public class Categoria implements Serializable {
-
+    // Reconstruiremos el obejto de tipo categoria
+    private static final long serialVersionUID = 0L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id; // 'autoincremental
+    @Column(length = 150, nullable = false)
     private String nombre;
     private String descripcion;
+    @Column(nullable = false)
     private LocalDate fechaRegistro;
     private String foto;
 //   ' relaciones
+    @OneToOne(optional = true)
+    @JoinColumn(name = "categorias")
     private Usuario usuario;
+    @OneToMany(mappedBy = "categorias")
     private List<Gasto> gastos;
 
     public Categoria() {

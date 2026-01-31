@@ -33,7 +33,9 @@ public class Usuario implements Serializable {
     @Column(name = "ROL")
     private RolUsuarioEnum rol; // 'administrador, miembro
 //  relaciones
+   @OneToMany(mappedBy = "usuario")
    private List<Fuente> fuentes;
+   @OneToMany(mappedBy = "usuario")
    private List<Categoria> categorias;
    @OneToMany(mappedBy = "creador")
    private List<Familia> familias;
