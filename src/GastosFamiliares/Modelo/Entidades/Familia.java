@@ -17,26 +17,27 @@ import javax.persistence.OneToMany;
  */
 @Entity(name = "Familias")
 public class Familia implements Serializable {
-    // Reconstruiremos el obejto de tipo categoria
+    // Reconstruiremos el obejto de tipo familia
     private static final long serialVersionUID = 0L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id; // autoincremental
     @Column(length = 150, nullable = false)
     private String nombre;
     private String direccion;
     @Column(length = 70, unique = true)
     private String correo;
-    @Column(length = 30)
+    @Column(length = 10, unique = true)
     private String numTelefonico;
+    @Column(unique = true)
     private String foto;
     // relaciones
     @ManyToOne(optional = true)
-    @JoinColumn(name = "familias")
-    private Usuario creador;
-    @OneToMany(mappedBy = "familia")
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
+    @OneToMany()
     private List<Miembro> miembros;
-    @OneToMany(mappedBy = "familia")
+    @OneToMany()
     private List<BolsaDeAhorro> bolsasDeAhorro;
 
     // Constructores
@@ -45,19 +46,17 @@ public class Familia implements Serializable {
 
     public Familia(String nombre, Usuario creador) {
         this.nombre = nombre;
-        this.creador = creador;
+        this.usuario = creador;
     }
 
-    public Familia(int id, String nombre, String direccion, String correo,
-            String numTelefonico, String foto, Usuario creador,
-            List<Miembro> miembros, List<BolsaDeAhorro> bolsasDeAhorro) {
+    public Familia(int id, String nombre, String direccion, String correo, String numTelefonico, String foto, Usuario usuario, List<Miembro> miembros, List<BolsaDeAhorro> bolsasDeAhorro) {
         this.id = id;
         this.nombre = nombre;
         this.direccion = direccion;
         this.correo = correo;
         this.numTelefonico = numTelefonico;
         this.foto = foto;
-        this.creador = creador;
+        this.usuario = usuario;
         this.miembros = miembros;
         this.bolsasDeAhorro = bolsasDeAhorro;
     }
@@ -110,12 +109,12 @@ public class Familia implements Serializable {
         return foto;
     }
 
-    public void setCreador(Usuario creador) {
-        this.creador = creador;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
-    public Usuario getCreador() {
-        return creador;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
     public void setMiembros(List<Miembro> miembros) {
@@ -158,10 +157,11 @@ public class Familia implements Serializable {
 
     @Override
     public String toString() {
-        return "Familia{" + "id=" + id + ", nombre=" + nombre + ", direccion="
-                + direccion + ", correo=" + correo + ", numTelefonico="
-                + numTelefonico + ", foto=" + foto + ", creador=" + creador
-                + ", miembros=" + miembros + ", bolsasDeAhorro="
-                + bolsasDeAhorro + '}';
+        return "Familia{" + "id=" + id + ", nombre=" + nombre + ", direccion=" 
+                + direccion + ", correo=" + correo + ", numTelefonico=" 
+                + numTelefonico + ", foto=" + foto + ", usuario=" + usuario 
+                + ", miembros=" + miembros + ", bolsasDeAhorro=" + bolsasDeAhorro + '}';
     }
+
+    
 }

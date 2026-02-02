@@ -8,7 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -21,7 +21,7 @@ public class Aporte implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id; // 'autoincremental
-    @Column(length = 120, nullable = false)
+    @Column(length = 60, nullable = false)
     private String nombre;
     @Column(nullable = false)
     private float valor;
@@ -29,18 +29,15 @@ public class Aporte implements Serializable{
     @Column(nullable = false)
     private LocalDateTime fechaRegistro;
 //   ' relaciones
-    @OneToOne(optional = true)
-    @JoinColumn(name = "aportes")
+    @ManyToOne(optional = true)
+    @JoinColumn(name = "miembro")
     private Miembro miembro;
-    @OneToOne(optional = true)
-    @JoinColumn(name = "aportes")
+    @ManyToOne(optional = true)
+    @JoinColumn(name = "bolsaAhorro_id")
     private BolsaDeAhorro bolsaAhorro;
-    @OneToOne(optional = true)
-    @JoinColumn(name = "aportes")
+    @ManyToOne(optional = true)
+    @JoinColumn(name = "ingreso_id")
     private Ingreso ingreso;
-    @OneToOne(optional = true)
-    @JoinColumn(name = "aporte")
-    private Gasto gasto;
 
     public Aporte() {
     }
@@ -55,7 +52,7 @@ public class Aporte implements Serializable{
     
     public Aporte(int id, String nombre, float valor, String descripcion, 
             LocalDateTime fechaRegistro, Miembro miembro, 
-            BolsaDeAhorro bolsaAhorro, Ingreso ingreso, Gasto gasto) {
+            BolsaDeAhorro bolsaAhorro, Ingreso ingreso) {
         this.id = id;
         this.nombre = nombre;
         this.valor = valor;
@@ -64,7 +61,6 @@ public class Aporte implements Serializable{
         this.miembro = miembro;
         this.bolsaAhorro = bolsaAhorro;
         this.ingreso = ingreso;
-        this.gasto = gasto;
     }
 
     public int getId() {
@@ -131,14 +127,6 @@ public class Aporte implements Serializable{
         this.ingreso = ingreso;
     }
 
-    public Gasto getGasto() {
-        return gasto;
-    }
-
-    public void setGasto(Gasto gasto) {
-        this.gasto = gasto;
-    }
-
     @Override
     public int hashCode() {
         int hash = 7;
@@ -166,6 +154,6 @@ public class Aporte implements Serializable{
         return "Aporte{" + "id=" + id + ", nombre=" + nombre + ", valor=" + 
                 valor + ", descripcion=" + descripcion + ", fechaRegistro=" + 
                 fechaRegistro + ", miembro=" + miembro + ", bolsaAhorro=" + 
-                bolsaAhorro + ", ingreso=" + ingreso + ", gasto=" + gasto + '}';
+                bolsaAhorro + ", ingreso=" + ingreso + '}';
     }
 }

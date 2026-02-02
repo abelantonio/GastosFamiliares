@@ -10,8 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 /**
  *
@@ -19,12 +19,12 @@ import javax.persistence.OneToOne;
  */
 @Entity(name = "Ingresos")
 public class Ingreso implements Serializable {
-    // Reconstruir el objeto de tipo ingreso
+    // Reconstruiremos el objeto de tipo ingreso
     private static final long serialVersionUID = 0L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;  // 'autoincremental
-    @Column(length = 100, nullable = false)
+    @Column(length = 70, nullable = false)
     private String nombre;
     @Column(nullable = false)
     private float valor;
@@ -33,15 +33,15 @@ public class Ingreso implements Serializable {
     @Column(nullable = false)
     private LocalDate fechaActualRegistro;
 //    ' relaciones
-    @OneToOne(optional = true)
-    @JoinColumn(name = "ingresos")
+    @ManyToOne(optional = true)
+    @JoinColumn(name = "fuente_id")
     private Fuente fuente;
-    @OneToOne(optional = true)
-    @JoinColumn(name = "ingresos")
+    @ManyToOne()
+    @JoinColumn(name = "miembro_id")
     private Miembro miembro;
-    @OneToMany(mappedBy = "ingreso")
+    @OneToMany()
     private List<Aporte> aportes; // ' puede ser null
-
+   
     public Ingreso() {
 
     }

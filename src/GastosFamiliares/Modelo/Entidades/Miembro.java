@@ -6,36 +6,52 @@ import GastosFamiliares.Modelo.Enumeraciones.RolUsuarioEnum;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 /**
  *
  * @author Abel Antonio Tatis Maturana
  */
+@Entity
 public class Miembro extends Usuario implements Serializable {
-
+    // Reconstruiremos el objeto de tipo miembro
+    private static final long serialVersionUID = 0L;
+    @Column(length = 30)
     private String segundoNombre;
+    @Column(length = 50, nullable = false)
     private String segundoApellido;
+    @Column(length = 70)
     private String direccion;
+    @Column(length = 10, unique = true)
     private String numTelefonico;
+    @Column(length = 25, unique = true)
     private String foto;
     private LocalDate fechaNacimiento;
+    @Column(length = 40)
     private String ocupacion;
+    @Enumerated(EnumType.STRING)
+    @Column(length = 6)
     private RolFamiliarMiembroEnum rolFamiliar;
+    @Enumerated(EnumType.STRING)
+    @Column(length = 9)
     private GeneroMiembroEnum genero;
 // ' relaciones
-    @OneToOne(optional = true)
-    @JoinColumn(name = "miembros")
+    @ManyToOne(optional = true)
+    @JoinColumn(name = "familia_id")
     private Familia familia;
-    @OneToMany(mappedBy = "miembro")
+    @OneToMany()
     private List<Ingreso> ingresos;
-    @OneToMany(mappedBy = "miembro")
+    @OneToMany()
     private List<Gasto> gastos;
-    @OneToMany(mappedBy = "miembro")
+    @OneToMany()
     private List<BolsaDeAhorro> bolsasDeAhorro;
-    @OneToMany(mappedBy = "miembro")
+    @OneToMany()
     private List<Aporte> aportes;
 
     public Miembro() {

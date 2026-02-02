@@ -10,8 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -19,22 +19,23 @@ import javax.persistence.OneToOne;
  */
 @Entity(name = "Categorias")
 public class Categoria implements Serializable {
-    // Reconstruiremos el obejto de tipo categoria
+    // Reconstruiremos el objeto de tipo categoria
     private static final long serialVersionUID = 0L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id; // 'autoincremental
-    @Column(length = 150, nullable = false)
+    @Column(length = 60, nullable = false, unique = true)
     private String nombre;
     private String descripcion;
     @Column(nullable = false)
     private LocalDate fechaRegistro;
+    @Column(unique = true)
     private String foto;
 //   ' relaciones
-    @OneToOne(optional = true)
-    @JoinColumn(name = "categorias")
+    @ManyToOne(optional = true)
+    @JoinColumn(name = "usuario_id")
     private Usuario usuario;
-    @OneToMany(mappedBy = "categorias")
+    @ManyToMany()
     private List<Gasto> gastos;
 
     public Categoria() {

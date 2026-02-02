@@ -3,14 +3,15 @@ package GastosFamiliares.Modelo.Entidades;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 /**
  *
@@ -23,17 +24,18 @@ public class Fuente implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id; // 'autoincremental
-    @Column(length = 100, nullable = false)
+    @Column(length = 40, nullable = false, unique = true)
     private String nombre;
     private String descripcion;
     @Column(nullable = false)
     private LocalDate fechaRegistro;
+    @Column(unique = true)
     private String icono;
     // ' relaciones
-    @OneToOne(optional = true)
-    @JoinColumn(name = "fuentes")
+    @ManyToOne(optional = true)
+    @JoinColumn(name = "usuario_id")
     private Usuario usuario;
-    @OneToMany(mappedBy = "fuente")
+    @OneToMany()
     private List<Ingreso> ingresos;
 
     public Fuente() {
@@ -116,7 +118,7 @@ public class Fuente implements Serializable {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 17 * hash + this.id;
+        hash = 37 * hash + this.id;
         return hash;
     }
 
@@ -132,9 +134,9 @@ public class Fuente implements Serializable {
             return false;
         }
         final Fuente other = (Fuente) obj;
-        return this.id == other.id;
+        return Objects.equals(this.nombre, other.nombre);
     }
-
+    
     @Override
     public String toString() {
         return "Fuente{" + "id=" + id + ", nombre=" + nombre

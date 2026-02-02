@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -13,8 +12,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 /**
  *
@@ -27,7 +26,7 @@ public class BolsaDeAhorro implements Serializable{
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
    private int id; // 'autoincremental
-   @Column(length = 150, nullable = false)
+   @Column(length = 40, nullable = false)
    private String nombre;
    private String descripcion;
    @Column(nullable = false)
@@ -36,33 +35,32 @@ public class BolsaDeAhorro implements Serializable{
    private LocalDate fechaInicio;
    @Column(nullable = false)
    private LocalDate fechaFin;
+   @Column(unique = true)
    private String foto;
-   @Column(nullable = false)
-   private float montoIdeal;
    @Column(nullable = false)
    private float objetivo;
    @Enumerated(EnumType.STRING)
+   @Column(length = 7)
    private EstadoBolsaAhorroEnum estado;
 //   ' relaciones
-   @OneToOne(optional = true)
-   @JoinColumn(name = "bolsasDeAhorro")
+   @ManyToOne(optional = true)
+   @JoinColumn(name = "miembro_id")
    private Miembro miembro;
-   @OneToOne(optional = true)
-   @JoinColumn(name = "bolsasDeAhorro")
+   @ManyToOne(optional = true)
+   @JoinColumn(name = "familia_id")
    private Familia familia;
-   @OneToMany(mappedBy = "bolsaAhorro")
+   @OneToMany()
    private List<Aporte> aportes;
 
     public BolsaDeAhorro() {
     }
 
     public BolsaDeAhorro(String nombre, LocalDate fechaInicio, 
-            LocalDate fechaFin, float montoIdeal, float objetivo, Miembro miembro, 
+            LocalDate fechaFin, float objetivo, Miembro miembro, 
             Familia familia) {
         this.nombre = nombre;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
-        this.montoIdeal = montoIdeal;
         this.objetivo = objetivo;
         this.miembro = miembro;
         this.familia = familia;
@@ -141,14 +139,6 @@ public class BolsaDeAhorro implements Serializable{
 
     public void setFoto(String foto) {
         this.foto = foto;
-    }
-
-    public float getMontoIdeal() {
-        return montoIdeal;
-    }
-
-    public void setMontoIdeal(float montoIdeal) {
-        this.montoIdeal = montoIdeal;
     }
 
     public float getObjetivo() {

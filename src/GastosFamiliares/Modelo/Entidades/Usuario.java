@@ -17,6 +17,7 @@ import javax.persistence.OneToMany;
  */
 @Entity(name="Usuarios")
 public class Usuario implements Serializable {
+    // Reconstruireos el objeto de tipo usuario
     private static final long serialVersionUID = 0L;
     @Id
     @Column(name = "ID", length = 20)
@@ -30,14 +31,14 @@ public class Usuario implements Serializable {
     @Column (name = "CORREO", nullable = false, unique = true, length = 70)
     private String correo;
     @Enumerated(EnumType.STRING)
-    @Column(name = "ROL")
+    @Column(name = "ROL", length = 13)
     private RolUsuarioEnum rol; // 'administrador, miembro
 //  relaciones
    @OneToMany(mappedBy = "usuario")
    private List<Fuente> fuentes;
    @OneToMany(mappedBy = "usuario")
    private List<Categoria> categorias;
-   @OneToMany(mappedBy = "creador")
+   @OneToMany(mappedBy = "usuario")
    private List<Familia> familias;
 
     // Constructor por defecto (sin parametros)

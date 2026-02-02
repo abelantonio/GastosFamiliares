@@ -10,7 +10,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 /**
@@ -24,7 +26,7 @@ public class Gasto implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id; // 'autoincremental
-    @Column(length = 100, nullable = false)
+    @Column(length = 70, nullable = false)
     private String nombre;
     @Column(nullable = false)
     private float valor;
@@ -33,13 +35,17 @@ public class Gasto implements Serializable {
     @Column(nullable = false)
     private LocalDate fechaRegistro;
     // ' relaciones
-    @OneToMany()
-    @JoinColumn(name = "gastos")
+    @ManyToMany()
+    @JoinTable(
+        name = "categorias_gastos",
+        joinColumns = @JoinColumn(name = "gasto_id"),
+        inverseJoinColumns = @JoinColumn(name = "categoria_id")
+    )
     private List<Categoria> categorias;
-    @OneToOne(optional = true)
-    @JoinColumn(name = "gastos")
+    @ManyToOne(optional = true)
+    @JoinColumn(name = "miembro_id")
     private Miembro miembro;
-    @OneToOne(mappedBy = "gasto")
+    @OneToOne()
     private Aporte aporte; // ' puede ser null
 
     public Gasto() {
