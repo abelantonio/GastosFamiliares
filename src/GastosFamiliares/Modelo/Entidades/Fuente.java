@@ -35,7 +35,7 @@ public class Fuente implements Serializable {
     @ManyToOne(optional = true)
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
-    @OneToMany()
+    @OneToMany(mappedBy = "fuente")
     private List<Ingreso> ingresos;
 
     public Fuente() {

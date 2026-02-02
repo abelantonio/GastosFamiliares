@@ -49,7 +49,7 @@ public class BolsaDeAhorro implements Serializable{
    @ManyToOne(optional = true)
    @JoinColumn(name = "familia_id")
    private Familia familia;
-   @OneToMany()
+   @OneToMany(mappedBy = "bolsaAhorro")
    private List<Aporte> aportes;
 
     public BolsaDeAhorro() {

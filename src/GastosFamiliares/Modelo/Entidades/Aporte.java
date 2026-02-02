@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -30,7 +31,7 @@ public class Aporte implements Serializable{
     private LocalDateTime fechaRegistro;
 //   ' relaciones
     @ManyToOne(optional = true)
-    @JoinColumn(name = "miembro")
+    @JoinColumn(name = "miembro_id")
     private Miembro miembro;
     @ManyToOne(optional = true)
     @JoinColumn(name = "bolsaAhorro_id")
@@ -38,21 +39,25 @@ public class Aporte implements Serializable{
     @ManyToOne(optional = true)
     @JoinColumn(name = "ingreso_id")
     private Ingreso ingreso;
+    @OneToOne(optional = true)
+    @JoinColumn(name = "gasto_id")
+    private Gasto gasto;
 
     public Aporte() {
     }
 
-    public Aporte(String nombre, float valor, Miembro miembro, BolsaDeAhorro bolsaAhorro, Ingreso ingreso) {
+    public Aporte(String nombre, float valor, Miembro miembro, BolsaDeAhorro bolsaAhorro, Ingreso ingreso, Gasto gasto) {
         this.nombre = nombre;
         this.valor = valor;
         this.miembro = miembro;
         this.bolsaAhorro = bolsaAhorro;
         this.ingreso = ingreso;
+        this.gasto = gasto;
     }
     
     public Aporte(int id, String nombre, float valor, String descripcion, 
             LocalDateTime fechaRegistro, Miembro miembro, 
-            BolsaDeAhorro bolsaAhorro, Ingreso ingreso) {
+            BolsaDeAhorro bolsaAhorro, Ingreso ingreso, Gasto gasto) {
         this.id = id;
         this.nombre = nombre;
         this.valor = valor;
@@ -61,6 +66,7 @@ public class Aporte implements Serializable{
         this.miembro = miembro;
         this.bolsaAhorro = bolsaAhorro;
         this.ingreso = ingreso;
+        this.gasto = gasto;
     }
 
     public int getId() {
@@ -154,6 +160,6 @@ public class Aporte implements Serializable{
         return "Aporte{" + "id=" + id + ", nombre=" + nombre + ", valor=" + 
                 valor + ", descripcion=" + descripcion + ", fechaRegistro=" + 
                 fechaRegistro + ", miembro=" + miembro + ", bolsaAhorro=" + 
-                bolsaAhorro + ", ingreso=" + ingreso + '}';
+                bolsaAhorro + ", ingreso=" + ingreso + ", Gasto= " + gasto + '}';
     }
 }

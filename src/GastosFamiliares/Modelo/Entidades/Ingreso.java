@@ -36,10 +36,10 @@ public class Ingreso implements Serializable {
     @ManyToOne(optional = true)
     @JoinColumn(name = "fuente_id")
     private Fuente fuente;
-    @ManyToOne()
+    @ManyToOne(optional = true)
     @JoinColumn(name = "miembro_id")
     private Miembro miembro;
-    @OneToMany()
+    @OneToMany(mappedBy = "ingreso")
     private List<Aporte> aportes; // ' puede ser null
    
     public Ingreso() {

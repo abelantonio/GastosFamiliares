@@ -45,13 +45,13 @@ public class Miembro extends Usuario implements Serializable {
     @ManyToOne(optional = true)
     @JoinColumn(name = "familia_id")
     private Familia familia;
-    @OneToMany()
+    @OneToMany(mappedBy = "miembro")
     private List<Ingreso> ingresos;
-    @OneToMany()
+    @OneToMany(mappedBy = "miembro")
     private List<Gasto> gastos;
-    @OneToMany()
+    @OneToMany(mappedBy = "miembro")
     private List<BolsaDeAhorro> bolsasDeAhorro;
-    @OneToMany()
+    @OneToMany(mappedBy = "miembro")
     private List<Aporte> aportes;
 
     public Miembro() {
