@@ -45,7 +45,7 @@ public class Gasto implements Serializable {
     @ManyToOne(optional = true)
     @JoinColumn(name = "miembro_id")
     private Miembro miembro;
-    @OneToOne()
+    @OneToOne(mappedBy = "gasto")
     private Aporte aporte; // ' puede ser null
 
     public Gasto() {

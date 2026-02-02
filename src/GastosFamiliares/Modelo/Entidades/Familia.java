@@ -35,9 +35,9 @@ public class Familia implements Serializable {
     @ManyToOne(optional = true)
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
-    @OneToMany()
+    @OneToMany(mappedBy = "familia")
     private List<Miembro> miembros;
-    @OneToMany()
+    @OneToMany(mappedBy = "familia")
     private List<BolsaDeAhorro> bolsasDeAhorro;
 
     // Constructores

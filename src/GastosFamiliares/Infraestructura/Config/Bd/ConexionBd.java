@@ -1,9 +1,9 @@
 package GastosFamiliares.Infraestructura.Config.Bd;
 
-import javax.persistence.EntityManager;
+//import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import GastosFamiliares.Modelo.Entidades.Usuario;
+//import GastosFamiliares.Modelo.Entidades.Usuario;
 
 /**
  *
@@ -13,7 +13,7 @@ public class ConexionBd {
    private static EntityManagerFactory conexion;
    public static EntityManagerFactory conectar(){
        if(conexion == null){
-           conexion = Persistence.createEntityManagerFactory("ConfiguracionBd");
+           conexion = Persistence.createEntityManagerFactory("GastosFamiliaresPU");
        }
        return conexion;
    }

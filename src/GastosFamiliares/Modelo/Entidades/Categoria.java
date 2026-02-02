@@ -35,7 +35,7 @@ public class Categoria implements Serializable {
     @ManyToOne(optional = true)
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
-    @ManyToMany()
+    @ManyToMany(mappedBy = "categorias")
     private List<Gasto> gastos;
 
     public Categoria() {
