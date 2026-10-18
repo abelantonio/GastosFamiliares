@@ -1,0 +1,36 @@
+@startuml
+left to right direction
+:Usuario: as User
+package seguridad {
+   (Registrarme) as CU0
+   (Validar credenciales) as CU1
+   (Iniciar sesion) as CU2
+   CU2 ..> CU1 : <<include>>
+   (Olvidar contraseña) as CU3
+   CU2 ..> CU3 : <<extend>>
+   (Cerrar sesion) as CU4
+     note right : Cerrar la sesion que esta \nactiva por el momento
+   (Validar password) as CU5
+   (Actualizar mi perfil) as CU6
+    CU6 ..>  CU5 : <<include>>
+   (Cerrar mi cuenta) as CU7
+   CU7 ..> CU1 : <<include>>
+    note right : Cerrar el perfil temporalmente o \npara siempre  
+   (Recordar password) as CU8
+   (Consultar el usuario) as CU9 
+   (Habilitar/Deshabilitar \nun perfil) as CU10
+    CU10 ..> CU8 : <<include>>
+   User --> CU0
+   User --> CU2
+   User -- CU4
+   User --> CU6
+   User --> CU7
+   User <-- CU8
+   User --> CU10
+
+/' la flecha en este caso "asociacion", apunta al caso de uso siempre y 
+      cuando se vaya a ingresar datos al sistema, de lo contrario apuntara
+      siempre al actor  
+'/
+}
+@enduml

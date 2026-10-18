@@ -1,0 +1,78 @@
+@startuml
+left to right direction
+actor Miembro as Miembro
+/' casos de uso que tienen que ver con el registro de ingresos del
+   miembro en el sistema
+'/
+Miembro --> gestionDeIngreso
+package gestionDeIngreso {
+(Registrar mi ingreso) as CU0
+(Consultar mi ingreso) as CU1
+  (Consultar mi ingreso \npor fecha) as CU10
+  (Consultar mi ingreso \npor descripcion) as CU11
+  (Consultar mi ingreso \npor valor) as CU12
+  (Consultar mi ingreso \npor nombre) as CU13
+  (Consultar mi aporte) as CU14
+  (Consultar mi ingreso \npor aporte) as CU15
+   CU15 ..> CU14 : <<include>>
+   note bottom : mostrar el ingreso de \ndonde provee ese aporte
+  (Consultar mi gasto) as CU16
+  (Consultar mi ingreso \npor gasto) as CU17
+   CU17 ..> CU16 : <<include>>
+  note bottom : mostrar el ingreso de \ndonde provee ese gasto
+CU10 -|> CU1
+CU11 -|> CU1
+CU12 -|> CU1
+CU13 -|> CU1
+CU15 -|> CU1
+CU17 -|> CU1
+(Actualizar la informacion \nde mi ingreso) as CU2
+CU2 ..> CU1 : <<include>>
+(Eliminar mi ingreso) as CU3
+CU3 ..> CU1 : <<include>>
+(Listar mis ingresos) as CU4
+  (Listar mis ingresos \npor fecha) as CU40
+  (Listar mis ingresos \npor periodo) as CU41
+  (Listar mis ingresos \npor valor) as CU42
+  (Listar mis ingresos \npor nombre) as CU43
+  (Consultar la fuente) as CU44
+  (Listar mis ingresos \npor fuente) as CU45
+   CU45 ..> CU44 : <<include>>
+   note bottom : mostrar los ingresos que \nproveen de esa fuente
+CU40 -|> CU4
+CU41 -|> CU4
+CU42 -|> CU4
+CU43 -|> CU4
+CU44 -|> CU4
+(Totalizar todos mis ingresos) as CU5
+note left : mostrar solo el total \nde todos mis ingresos
+  (Totalizar todos mis \ningresos por fecha) as CU50
+  (Totalizar todos mis \ningresos por periodo) as CU51
+  (Totalizar todos mis \ningresos por valor) as CU52
+  (Totalizar todos mis \ningresos por nombre) as CU53
+  (Consultar la fuente) as CU54
+  (Totalizar todos mis \ningresos por fuente) as CU55
+   note bottom : mostrar el total de \nmis ingresos que \nproveen de esa fuente
+   CU55 ..> CU54 : <<include>>
+CU50 -|> CU5
+CU51 -|> CU5
+CU52 -|> CU5
+CU53 -|> CU5
+CU55 -|> CU5
+(Listar la cantidad de mis ingresos) as CU6
+  note left : mostrar solo la \ncantidad de gastos
+  (Listar la cantidad de mis ingresos \npor periodo) as CU60
+  (Listar la cantidad de mis ingresos \npor valor) as CU61
+  (Listar la cantidad de mis ingresos \npor nombre) as CU62
+  (Consultar la fuente) as CU63
+  (Listar la cantidad de mis ingresos \npor fuente) as CU64
+   CU64 ..> CU63 : <<include>>
+CU60 -|> CU6
+CU61 -|> CU6
+CU62 -|> CU6
+CU64 -|> CU6
+}
+@enduml
+
+
+ 

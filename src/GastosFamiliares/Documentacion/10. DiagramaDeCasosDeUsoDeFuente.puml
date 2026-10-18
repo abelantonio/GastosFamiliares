@@ -1,0 +1,42 @@
+@startuml
+left to right direction
+actor Miembro as Miembro
+:Administrador: as Admin
+package gestionDeFuente {
+  (Crear una fuente) as CU0
+  (Consultar una fuente) as CU1
+   (Consultar una fuente \npor nombre) as CU10
+   (Consultar una fuente \npor descripcion) as CU11
+   (Consultar una fuente \npor icono) as CU12
+   (Consultar una fuente \npor fecha) as CU13
+  CU10 -|> CU1
+  CU11 -|> CU1
+  CU12 -|> CU1
+  CU13 -|> CU1
+  (Actualizar la informacion \nde una fuente) as CU2
+  CU2 ..> CU1 : <<include>>
+  (Eliminar una fuente) as CU3
+  CU3 ..> CU1 : <<include>>
+  (Listar las fuentes) as CU4
+    (Listar las fuentes con \nmas ingreso) as CU40
+    (Listar las fuentes con \nmenos ingreso) as CU41
+    (Listar las fuentes \nque no contienen ingreso) as CU42
+    (Listar las fuentes \ncon ingreso) as CU43
+    (Listar las fuentes \npor fecha) as CU44
+   CU40 -|> CU4 
+   CU41 -|> CU4 
+   CU42 -|> CU4 
+   CU43 -|> CU4 
+   CU44 -|> CU4 
+   Miembro --> CU0
+   Miembro <-- CU1
+   Miembro --> CU2
+   Miembro --> CU3
+   Miembro <-- CU4
+   Admin --> CU0
+   Admin <-- CU1
+   Admin --> CU2
+   Admin --> CU3
+   Admin <-- CU4
+}
+@enduml
