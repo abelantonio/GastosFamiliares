@@ -1,0 +1,42 @@
+@startuml
+left to right direction
+actor Miembro as Miembro
+:Administrador: as Admin
+package gestionDeCategoria {
+  (Crear una categoria) as CU0
+  (Consultar una categoria) as CU1
+   (Consultar una categoria \npor nombre) as CU10
+   (Consultar una categoria \npor descripcion) as CU11
+   (Consultar una categoria \npor icono) as CU12
+   (Consultar una categoria \npor fecha) as CU13
+  CU10 -|> CU1 
+  CU11 -|> CU1 
+  CU12 -|> CU1 
+  CU13 -|> CU1 
+  (Eliminar una categoria) as CU2
+  CU2 ..> CU1 : <<include>>
+  (Actualizar la informacion \nde una categoria) as CU3
+  CU3 ..> CU1 : <<include>>
+  (Listar las categorias) as CU4
+    (Listar las categorias con \nmas gasto) as CU40
+    (Listar las categorias con \nmenos gasto) as CU41
+    (Listar las categorias \nque no contienen gasto) as CU42
+    (Listar las categorias \ncon gasto) as CU43
+    (Listar las categorias \npor fecha) as CU44
+   CU40 -|> CU4 
+   CU41 -|> CU4 
+   CU42 -|> CU4
+   CU43 -|> CU4
+   CU44 -|> CU4
+   Miembro --> CU0
+   Miembro <-- CU1
+   Miembro --> CU2
+   Miembro --> CU3
+   Miembro <-- CU4
+   Admin --> CU0
+   Admin <-- CU1
+   Admin --> CU2
+   Admin --> CU3
+   Admin <-- CU4
+}
+@enduml

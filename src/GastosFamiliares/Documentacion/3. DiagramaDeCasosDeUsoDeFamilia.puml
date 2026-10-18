@@ -1,0 +1,50 @@
+@startuml
+left to right direction
+actor Usuario as User
+:Administrador: as Admin
+:Miembro: as Miembro
+/' casos de uso que tienen que ver con la gestion de familias a las que 
+   pertenecen los miembros de cada uno del sistema
+'/
+package gestionDeFamilia {
+(Crear mi familia) as CU0
+(Consultar \nmi familia) as CU1
+  (Consultar mi familia \npor nombre) as CU10
+  (Consultar mi familia \npor correo) as CU11
+  (Consultar mi familia \npor direccion) as CU12
+  (Consultar mi familia \npor numeroDeTelefono) as CU13
+CU10 -|> CU1
+CU11 -|> CU1
+CU12 -|> CU1
+CU13 -|> CU1
+(Actualizar la informacion \nde mi familia) as CU2
+CU2 ..> CU1 : <<include>>
+(Eliminar mi familia) as CU3
+CU3 ..> CU1 : <<include>>
+(Aprobar/Rechazar la solicitud \nde un miembro para hacer parte \nde mi familia) as CU4
+  note right : solo para creadores de familia
+(Invitar a un miembro a que \nsea parte de mi familia) as CU5
+  note right : solo para creadores de familia
+(Consultar miembro) as CU6
+(Asignar rol a un \nmiembro de mi familia) as CU7
+CU7 ..> CU6 : <<include>>
+note right : solo para creadores de familia
+(Consultar una familia) as CU8
+(Eliminar una familia) as CU9
+  CU9 ..> CU8 : <<include>>
+(Listar las familias \nregistradas) as CU100
+  note right : mostrar solo los nombres de las familias registradas
+Miembro --> CU0
+Miembro --> CU1
+Miembro --> CU2
+Miembro --> CU3
+Miembro <-- CU4
+Miembro --> CU5
+Miembro --> CU7
+Admin --> CU9
+User <-- CU100
+}
+@enduml
+
+
+ 

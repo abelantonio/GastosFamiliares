@@ -1,0 +1,97 @@
+@startuml
+left to right direction
+actor Miembro as Miembro
+/' casos de uso que tienen que ver con el registro de gastos 
+   de un miembro en el sistema
+'/
+Miembro <--> gestionDeGasto
+package gestionDeGasto {
+(Registrar mi gasto) as CU0
+(Consultar mi gasto) as CU1
+  (Consultar mi gasto \npor nombre) as CU10
+  (Consultar mi gasto \npor fecha) as CU11
+  (Consultar mi gasto \npor descripcion) as CU12
+  (Consultar mi gasto \npor valor) as CU13
+  (Consultar aporte) as CU14
+  (Consultar mi gasto \npor aporte) as CU15
+   CU15 ..> CU14 : <<include>>
+   note bottom : mostrar el gasto al que \npertenece a ese aporte
+CU10 -|> CU1
+CU11 -|> CU1
+CU12 -|> CU1
+CU13 -|> CU1
+CU15 -|> CU1
+(Actualizar la informacion \nde mi gasto) as CU2
+CU2 ..> CU1 : <<include>>
+(Eliminar mi gasto) as CU3
+CU3 ..> CU1 : <<include>>
+(Listar mis gastos) as CU4
+  (Listar mis gastos \npor nombre) as CU40
+  (Listar mis gastos \npor periodo) as CU41
+  (Listar mis gastos \npor valor) as CU42
+  (Listar mis gastos \npor fecha) as CU43
+  (Consultar la categoria) as CU44
+  (Listar mis gastos \npor categoria) as CU45
+  CU45 ..> CU44 : <<include>>
+  (Listar mis gastos \nsin aporte) as CU46
+   note bottom : mostrar los gastos que \nno contienen aporte
+  (Listar mis gastos \con aporte) as CU47
+   note bottom : mostrar los gastos que \ncontienen un aporte
+  (Consultar mi ingreso) as CU48
+  (Listar mis gastos \npor ingreso) as CU49
+   CU49 ..> CU48 : <<include>>
+   note bottom : mostrar todos mis gastos que \npertenecen a ese ingreso
+   (Listar mis gastos \nentre un rango de valores) as CU410
+CU40 -|> CU4
+CU41 -|> CU4
+CU42 -|> CU4
+CU43 -|> CU4
+CU45 -|> CU4
+CU46 -|> CU4
+CU47 -|> CU4
+CU49 -|> CU4
+CU410 -|> CU4
+(Totalizar todos mis gastos) as CU5
+note left : mostrar solo el \ntotal de mis gastos
+  (Totalizar mis \ngastos por fecha) as CU50
+  (Totalizar mis \ngastos por periodo) as CU51
+  (Totalizar mis \ngastos por valor) as CU52
+  (Totalizar mis \ngastos por nombre) as CU53
+  (Consultar la categoria) as CU54
+  (Totalizar mis \ngastos por categoria) as CU55
+   CU55 ..> CU54 : <<include>>
+  (Consultar mi ingreso) as CU56
+  (Totalizar todos mis \ngastos por ingreso) as CU57
+   CU57 ..> CU56 : <<include>>
+   note bottom : mostrar solo el \ntotal de mis gastos que \npertenecen a ese ingreso
+   (Totalizar todos mis gastos \nentre un rango de valores) as CU58
+CU50 -|> CU5
+CU51 -|> CU5
+CU52 -|> CU5
+CU53 -|> CU5
+CU55 -|> CU5
+CU57 -|> CU5
+CU58 -|> CU5
+(Listar la cantidad de mis gastos) as CU6
+  note left : mostrar solo la \ncantidad de gastos
+  (Listar la cantidad de mis gastos \npor periodo) as CU60
+  (Listar la cantidad de mis gastos \npor valor) as CU61
+  (Listar la cantidad de mis gastos \npor nombre) as CU62
+  (Consultar categoria) as CU63
+  (Listar la cantidad de mis gastos \npor categoria) as CU64
+   CU64 ..> CU63 : <<include>>
+  note bottom : mostrar la cantidad de \ngastos que \npertenecen a esa categoria
+  (Consultar ingreso) as CU65
+  (Listar la cantidad de mis gastos \npor ingreso) as CU66
+   CU66 ..> CU65 : <<include>>
+  note bottom : mostrar la cantidad de \ngastos que \npertenecen a ese ingreso
+CU60 -|> CU6
+CU61 -|> CU6
+CU62 -|> CU6
+CU63 -|> CU6
+CU65 -|> CU6
+}
+@enduml
+
+
+ 

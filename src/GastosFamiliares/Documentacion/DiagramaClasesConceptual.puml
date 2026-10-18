@@ -1,0 +1,276 @@
+@startuml
+left to right direction
+/' Conceptos:
+Usuarios(cuenta del sistema), Familias, Miembros
+Ingresos, Gastos, Fuentes, Categoria
+Bolsas De Ahorros, Aportes
+
+Clases Conceptuales: estas clases representan los conceptos
+inherentes al sistema
+nota: se recomienda que las clases se declaren de forma singular, por ejemplo: En vez de escribir Usuarios, seria "Usuario"                       
+'/
+
+/'-------------------
+  CLASES CONCEPTUALES
+  -------------------'/
+   
+class Usuario {
+    ' Propiedades
+    # String codigo;
+    # String password;
+    # String nombre;
+    # String apellido;
+    # RolUsuarioEnum rol; 
+      ' Admin, Usuario
+    # String email;
+      ' unico 
+    ' metodos
+    + Usuario();
+      ' constructor
+    + String getCodigo();
+      ' get
+    + void setCodigo(String codigo);
+      ' this.codigo = codigo;
+      ' set
+    ' Relaciones
+    - List<Familias> familias;
+      ' puede ser null
+}  
+
+class Familia {
+    ' Propiedades
+    - int id; 
+      ' autoincremental
+    - String nombre;
+      ' Unico
+    - String email; 
+      ' unico
+    - String direccion;
+      ' unico
+    - String numeroDeTelefono; 
+      ' unico
+    ' Relaciones
+    - Usuario usuario;
+    - List<Miembro> miembros;
+      ' puede ser null
+    - List<BolsaDeAhorro> bolsasDeAhorros;
+      ' puede ser null
+}
+
+class Miembro {
+    ' Propiedades
+    - String segundoNombre;
+    - String segundoApellido;
+    ' Relaciones
+    - generoMiembroEnum genero; 
+      ' Masculino, Femenino, Otro
+    - estadoCivilMiembroEnum estadoCivil; 
+      ' Soltero, Casado, Viudo
+    - RolFamiliarMiembroEnum rolFamiliar; 
+      ' Roles
+      /' Abuelo, Abuela, Papa, Mama, Tio, Tia, Primo, Prima, 
+        Hijo, Hija
+      '/
+    - String numeroDeTelefono; 
+      ' unico
+    - String ocupacion;
+    - LocalDate fechaNacimiento;
+    - String foto;
+    - List<Ingreso> ingresos;
+      ' Puede ser null
+    - List<Fuente> fuentes;
+      ' Puede ser null
+    - List<Gasto> gastos;
+      ' Puede ser null
+    - Familia familia;
+    - List<BolsaDeAhorro> bolsasDeAhorros;
+      ' Puede ser null
+    - List<Aporte> aportes;
+      ' Puede ser null
+}
+
+class Fuente {
+   ' Propiedades
+   - int id;
+     ' autoincremental
+   - String nombre;
+     ' unico
+   - String descripcion;
+   - String icono;
+   ' Relaciones
+   - List<Ingreso> ingresos;
+     ' puede ser null
+   - Miembro miembro;
+}
+
+class Ingreso {
+      ' Propiedades
+      - int id;
+        ' autoincremental
+      - String nombre;
+      - float valor;
+      - LocalDate fecha;
+        ' fecha manual (ingresada por el miembro)
+      - LocalDateTime fechaRegistro;
+        ' fecha y hora actual automatica (entregada por el sistema)
+     - String descripcion; 
+     ' Relaciones
+      - Fuente fuente;
+      - Miembro miembro;
+      - List<Gasto> gastos;
+      ' puede ser null
+      - List<Aporte> aportes;
+      ' puede ser null
+}
+
+class Categoria {
+    ' Propiedades
+    - int id; 
+      ' autoincremental
+    - String nombre;
+      ' unico
+    - LocalDateTime fechaRegistro; 
+      ' fecha y hora actual automatica (entregada por el sistema)
+    - LocalDate fecha;
+      ' fecha manual (ingresada por el miembro)
+    - String descripcion;
+    - String icono;
+    ' Relaciones
+    - Miembro miembro;
+    - List<Gasto> gastos;
+      ' puede ser null
+}
+
+class Gasto {
+    ' Propiedades
+    - int id;
+      ' autoincremental
+    - LocalDateTime fechaRegistro;
+      ' fecha y hora actual automatica (entregada por el sistema)
+    - LocalDate fecha;
+      ' fecha manual (ingresada por el miembro)
+    - String nombre;
+    - float valor;
+    - String descripcion;
+    ' Relaciones
+    - Miembro miembro;
+    - List<Categoria> categorias;
+    - Ingreso ingreso;
+    - Aporte aporte;
+      ' puede ser null  
+}
+
+class BolsaDeAhorro {
+   ' Propiedades
+   - int id;
+    ' autoincremental
+   - String nombre;
+   - float objetivo;
+     ' Dinero
+   - String proposito;
+     ' Descripcion del para que es la bolsa de ahorro
+   - String icono;
+   - LocalDateTime fechaRegistro;
+     ' fecha y hora actual automatica (generada por el sistema)
+   - LocalDate fecha;
+     ' fecha manual (ingresada por el miembro)
+   - LocalDate fechaInicio;
+   - LocalDate fechaCierre;
+   ' Relaciones
+   - EstadoBolsaDeAhorroEnum estado;
+     ' Activa (Sin terminar), Cerrada(No Cumplio Objetivo), Lograda (Cumplio objetivo)
+   - Familia familia;
+   - Miembro miembro;
+   - List<Aporte> aportes;
+     ' puede ser null
+}
+
+class Aporte {
+   ' Propiedades
+   - int id; 
+     ' autoincremental
+   - String nombre;
+   - LocalDateTime fechaRegistro;
+     ' fecha actual automatica (generada por el sistema)
+   - LocalDateTime fecha;
+     ' fecha manual (ingresada por el miembro)
+   - float valor;
+   - String descripcion;
+   ' Relaciones
+   - Miembro miembro;
+   - BolsaDeAhorro bolsaDeAhorro;
+   - Ingreso ingreso;
+   - Gasto gasto;
+}
+
+/' ----------
+  RELACIONES
+  ---------- '/
+
+' PROVEER --> Suministrar de...
+' PROVENIR --> Venir de... (LUGAR)
+Usuario <|-- Miembro : Es un
+Familia "*" -- "1" Usuario : Crear
+Familia "1" -- "*" Miembro : Pertenecer
+Ingreso "*" -- "1" Fuente : Proveer
+Ingreso "*" -- "1" Miembro : Registrar
+Fuente "*" -- "1" Miembro : Crear
+Categoria "*" -- "1" Miembro : Crear
+Gasto "*" -- "1" Miembro : Registrar
+Gasto "*" -- "1" Ingreso : Proveer
+Gasto "*" -- "*" Categoria : Pertenecer
+BolsaDeAhorro "*" -- "1" Miembro : Crear
+BolsaDeAhorro "*" -- "1" Familia : Pertenecer
+Aporte "*" -- "1" Miembro : Contribuir
+Aporte "*" -- "1" BolsaDeAhorro : Pertenecer
+Aporte "*" -- "1" Ingreso : Proveer
+Aporte "0..1" -- "1" Gasto : Pertenecer
+
+/' -------------
+  ENUMERACIONES
+  ------------- '/
+
+enum RolUsuarioEnum{
+   ADMINISTRADOR,
+   USUARIO
+   ' apartir del registro como usuario me convierto en un (Miembro) o no
+}
+
+enum RolFamiliaMiembroEnum{
+   ABUELO,
+   ABUELA,
+   PADRE,
+   MADRE,
+   HIJO,
+   HIJA,
+   TIA,
+   TIO,
+   PRIMO,
+   PRIMA
+}
+
+enum GeneroMiembroEnum{
+   MASCULINO,
+   FEMENINO,
+   OTRO
+}
+
+enum EstadoCivilMiembroEnum{
+   SOLTERO,
+   CASADO,
+   DIVORCIADO,
+   VIUDO
+}
+
+enum EstadoBolsaDeAhorroEnum{
+   ACTIVA,
+   CERRADA,
+   LOGRADA
+}
+
+' RolUsuarioEnum --> Admin, Usuario (Miembro)
+' RolFamiliarEnum --> Abuelo, Abuela, Papa, Mama, Tio, Tia, Primo, Prima, Hijo, Hija
+' GeneroMiembroEnum --> ' Masculino, Femenino, Otro
+' EstadoCivilMiembroEnum --> ' Soltero, Casado, Divorciado, Viudo
+' EstadoBolsaDeAhorroEnum --> Activa (Abierta - Sin terminar), Cerrada(No Cumplio Objetivo), Lograda (Cumplio objetivo)
+@enduml

@@ -1,0 +1,87 @@
+@startuml
+left to right direction
+:Miembro: as Miembro
+Miembro --> gestionDeAporte
+package gestionDeAporte {
+  (Crear mi aporte) as CU0
+  (Consultar mi aporte) as CU1
+   (Consultar mi aporte \npor fecha) as CU10
+   (Consultar mi aporte \npor valor) as CU11
+   (Consultar mi aporte \npor descripcion) as CU12
+   (Consultar mi aporte \npor nombre) as CU13
+   (Consultar mi aporte \npor proposito) as CU14
+     (Consultar gasto) as CU17
+    (Consultar mi aporte \npor gasto) as CU18
+    CU18 ..> CU17 : <<include>>
+    note right : mostrar el aporte \nque contiene ese \ngasto
+    CU10 -|> CU1
+    CU11 -|> CU1
+    CU12 -|> CU1
+    CU13 -|> CU1
+    CU14 -|> CU1
+    CU16 -|> CU1
+    CU18 -|> CU1
+  (Editar informacion de mi aporte) as CU2
+   CU2 ..> CU1 : <<include>>
+  (Eliminar mi aporte) as CU3
+   CU3 ..> CU1 : <<include>>
+  (Listar mis aportes) as CU4
+   (Listar mis aportes \npor fecha) as CU40
+   (Listar mis aportes \npor nombre) as CU41
+   (Listar mis aportes \npor valor) as CU42
+   (Consultar ingreso) as CU43
+   (Listar mis aportes \npor ingreso) as CU44
+    CU44 ..> CU43 : <<include>>
+    note right : mostrar mis aportes \nque proveen de ese \ningreso
+   (Consultar bolsa de ahorro de mi familia) as CU45
+   (Listar todos los aportes \npor bolsaDeAhorro) as CU46
+   CU46 ..> CU45 : <<include>>
+   note bottom : mostrar todos los aportes que \npertenecen a esa bolsa de ahorro
+   (Listar todos mis aportes \npor bolsaDeAhorro) as CU47
+   CU47 ..> CU45 : <<include>>
+   note bottom : mostrar todos mis aportes que \npertenecen a esa bolsa de ahorro
+   (Consultar miembro de mi familia) as CU48
+   (Listar todos los aportes \npor miembro) as CU49
+   CU49 ..> CU48 : <<include>>
+    note bottom : mostrar todos los aportes contribuidos por ese miembro
+   CU40 -|> CU4
+   CU41 -|> CU4
+   CU42 -|> CU4
+   CU44 -|> CU4
+   CU46 -|> CU4
+   CU47 -|> CU4
+   CU49 -|> CU4
+   (Totalizar todos mis aportes) as CU5
+     note left : mostrar solo el total de mis aportes
+    (Totalizar mis aportes \npor fecha) as CU50
+    (Totalizar mis aportes \npor valor) as CU51
+    (Totalizar mis aportes \npor nombre) as CU52
+    (Consultar la bolsa de ahorro de mi familia) as CU53
+    (Totalizar todos los aportes \npor bolsa de ahorro) as CU54
+     CU54 ..> CU53 : <<include>>
+     note bottom : mostrar solo el total \nde todos los aportes que \npertenecen a esa bolsa de ahorro
+    (Totalizar todos mis aportes \npor bolsa de ahorro) as CU55
+     CU55 ..> CU53 : <<include>>
+     note bottom : mostrar solo el total \nde todos mis aportes que \npertenecen a esa bolsa de ahorro
+    (Consultar mi ingreso) as CU56 
+    (Totalizar todos mis aportes \npor ingreso) as CU57
+     CU57 ..> CU56 : <<include>>
+     note bottom : mostrar solo el total \nde todos mis aportes que \npertenecen a ese ingreso
+    CU50 -|> CU5 
+    CU51 -|> CU5 
+    CU52 -|> CU5 
+    CU54 -|> CU5
+    CU55 -|> CU5
+    CU57 -|> CU5
+    (Listar la cantidad de mis aportes) as CU6
+    note left : mostrar solo la \ncantidad de gastos
+     (Listar la cantidad de mis aportes \npor periodo) as CU60
+     (Listar la cantidad de mis aportes \npor valor) as CU61
+     (Listar la cantidad de mis aportes \npor nombre) as CU62
+    CU60 -|> CU6
+    CU61 -|> CU6
+    CU62 -|> CU6
+(Consultar miembro de mi familia) as CU7
+(Listar la cantidad de aportes \npor miembro) as CU8
+CU8 ..> CU7 : <<include>>
+@enduml

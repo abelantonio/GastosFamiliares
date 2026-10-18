@@ -1,0 +1,64 @@
+@startuml
+left to right direction
+:Miembro: as Miembro
+Miembro --> bolsaDeAhorro
+package bolsaDeAhorro {
+  (Crear la bolsa de ahorro de mi familia) as CU0
+  (Consultar la bolsa de ahorro de mi familia) as CU1
+   (Consultar la bolsa de ahorro de \nmi familia por fecha) as CU10
+   (Consultar la bolsa de ahorro de \nmi familia por fechaInicio) as CU11
+   (Consultar la bolsa de ahorro de \nmi familia por fechaFin) as CU12
+   (Consultar la bolsa de ahorro de \nmi familia por objetivo) as CU13
+   (Consultar la bolsa de ahorro de \nmi familia por proposito) as CU14
+   (Consultar la bolsa de ahorro de \nmi familia por estado) as CU15
+   (Consultar la bolsa de ahorro de \nmi familia por nombre) as CU16
+   (Consultar mi aporte) as CU17
+   (Consultar la bolsa de ahorro de mi familia \npor aporte) as CU18
+   CU18 ..> CU17 : <<include>>
+    note bottom : mostrar la bolsa de \nahorro a la cual \npertenece ese aporte
+    CU10 -|> CU1
+    CU11 -|> CU1
+    CU12 -|> CU1
+    CU13 -|> CU1
+    CU14 -|> CU1
+    CU15 -|> CU1
+    CU16 -|> CU1
+    CU18 -|> CU1
+  (Editar informacion de \nla bolsa de ahorro \nde mi familia) as CU2
+   CU2 ..> CU1 : <<include>>
+  (Eliminar la bolsa \nde ahorro de mi familia) as CU3
+   CU3 ..> CU1 : <<include>>
+  (Listar las bolsas de ahorro de mi familia) as CU4
+   (Listar las bolsas de ahorro de \nmi familia por fecha) as CU40
+   (Listar las bolsas de ahorro de \nmi familia por periodoInicio) as CU41
+   (Listar las bolsas de ahorro de \nmi familia por fechaInicio) as CU42
+   (Listar las bolsas de ahorro de \nmi familia por periodoCierre) as CU43
+   (Listar las bolsas de ahorro de \nmi familia por fechaCierre) as CU44
+   (Listar las bolsas de ahorro de \nmi familia por objetivo) as CU45
+   (Listar las bolsas de ahorro de \nmi familia por estado) as CU46
+   (Listar las bolsas de ahorro de \nmi familia por nombre) as CU47
+    (Consultar la familia) as CU48
+   (Listar las bolsas de ahorros \npor familia) as CU49
+    CU49 ..> CU48 : <<include>>
+    note bottom : solo para creadores de familia
+    (Consultar el miembro) as CU410
+   (Listar las bolsas de ahorro \npor miembro) as CU411
+    CU411 ..> CU10 : <<include>>
+    note bottom : solo para creadores de familia
+   (Listar las bolsas de ahorro de \nmi familia entre \nun rango de valores) as CU412
+   CU40 -|> CU4
+   CU41 -|> CU4
+   CU42 -|> CU4
+   CU43 -|> CU4
+   CU44 -|> CU4
+   CU46 -|> CU4
+   CU47 -|> CU4
+   CU49 -|> CU4
+   CU411 -|> CU4
+   CU412 -|> CU4
+   (Cerrar la bolsa de \nahorro de \nmi familia) as CU5
+   CU5 ..> CU1 : <<include>>
+   (Ver el progreso de \nla bolsa de ahorro \nde mi familia) as CU6
+   CU6 ..> CU1 : <<include>>
+}
+@enduml

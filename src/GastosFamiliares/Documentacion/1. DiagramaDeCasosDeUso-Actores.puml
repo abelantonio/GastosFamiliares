@@ -1,0 +1,45 @@
+@startuml
+actor Usuario as User
+:Administrador: as Admin
+:Miembro: as Miembro
+Admin -|> User
+Miembro -|> User
+/'
+  Se lee y escribe primero el que va a heredar (hijo), y despues el que
+  va hacer heredado (padre), la punta de la flecha triangular siempre 
+  apunta hacia el padre.
+'/
+
+/'
+   formas de crear actores con alias
+    1. actor actor1 as actor1
+    2. :actor2: as actor2
+'/
+
+' actor Usuario as User
+/'
+  "User" --> va hacer un usuario cualquiera, que va a tener todas las funcionalidades de cualquier
+             persona que utilize el sistema
+'/
+
+' actor Administrador as Admin
+/'
+  "Admin" --> va hacer una persona que se encarga de realizar las operaciones que no pueden
+              realizar los demas usuarios, como por ejemplo, hacerle mantenimiento al sistema, es
+              decir, que podria ser deshabilitar un usuario en caso de no ser mas utilizado
+'/
+
+' actor Miembro as Miembro
+/'
+  "Miembro" --> va hacer un usuario llamado "miembro" que va hacer parte de las familias registradas en cuyo sistema, 
+                y ademas de eso que va a tener todas las funcionalidades un poco mas especificas que una persona 
+                utilize el sistema
+'/
+
+' comentario de una sola linea
+/' 
+   comentario
+   de varias
+   lineas 
+'/
+@enduml

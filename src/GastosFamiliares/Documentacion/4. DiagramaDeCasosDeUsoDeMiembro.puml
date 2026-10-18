@@ -1,0 +1,67 @@
+@startuml
+left to right direction
+actor Miembro as Miembro
+:Usuario: as User
+package gestionDeMiembro {
+ (Consultar la familia) as CU0
+ (Registrarse como un miembro) as CU1
+  CU1 ..> CU0 : <<include>>
+ (Solicitar ser miembro \nde una familia) as CU2
+  CU2 ..> CU0 : <<include>>
+ (Aceptar/Rechazar invitacion \npara ser parte de \nalguna familia) as CU3
+ (Consultar un miembro \nde mi familia) as CU4
+   (Consultar un miembro \nde mi familia por \nsegundoNombre) as CU40
+   (Consultar un miembro \nde mi familia por \nnumeroDeTelefono) as CU41
+   (Consultar un miembro \nde mi familia por \nfechaDeNacimiento) as CU42
+   (Consultar un miembro \nde mi familia por foto) as CU43
+ CU40 -|> CU4
+ CU41 -|> CU4
+ CU42 -|> CU4
+ CU43 -|> CU4
+ (Actualizar informacion de \nun miembro de mi familia) as CU5
+  CU5 ..> CU4 : <<include>>
+  note bottom : solo miembros creadores \nde familias
+ (Eliminar un miembro \nde mi familia) as CU6
+  CU6 ..> CU4 : <<include>>
+  note bottom : solo miembros creadores \nde familias
+ (Listar los miembros \nde mi familia) as CU7
+  (Listar los miembros de \nmi familia desocupados) as CU70
+  (Listar los miembros de \nmi familia \nmayores de edad) as CU71
+  (Listar los miembros de \nmi familia \nmenores de edad) as CU72
+  (Listar los miembros de \nmi familia que \ncontribuyen aportes) as CU73
+  (Listar los miembros de \nmi familia por ocupacion) as CU74
+  (Listar los miembros de \nmi familia por rolFamiliar) as CU75
+  (Listar los miembros de \nmi familia por genero) as CU76
+  CU70 -|> CU7
+  CU71 -|> CU7
+  CU72 -|> CU7
+  CU73 -|> CU7
+  CU74 -|> CU7
+  CU75 -|> CU7
+  CU76 -|> CU7
+  (Listar la cantidad de miembros \nde mi familia) as CU8
+   note left : solo para usuarios creadores de familia
+   (Listar la cantidad de miembros de \nmi familia desocupados) as CU80
+   (Listar la cantidad de miembros de \nmi familia \nmayores de edad) as CU81
+   (Listar la cantidad de miembros de \nmi familia \nmenores de edad) as CU82
+   (Listar la cantidad de miembros de \nmi familia que \ncontribuyen aportes) as CU83
+   (Listar la cantidad de miembros de \nmi familia por ocupacion) as CU84
+   (Listar la cantidad de miembros de \nmi familia por rolFamiliar) as CU85
+   (Listar la cantidad de miembros de \nmi familia por genero) as CU86 
+  CU80 -|> CU8
+  CU81 -|> CU8
+  CU82 -|> CU8
+  CU83 -|> CU8
+  CU84 -|> CU8
+  CU85 -|> CU8
+  CU86 -|> CU8
+  User --> CU1
+  User -- CU2
+  Miembro -- CU3
+  Miembro <-- CU4
+  Miembro --> CU5
+  Miembro --> CU6
+  Miembro <-- CU7
+  Miembro <-- CU8
+}
+@enduml
